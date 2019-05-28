@@ -4,7 +4,8 @@ import csv
 from sklearn.ensemble import IsolationForest
 
 ### READ FILE.CSV
-sample1 = pd.read_csv('teste1.csv',usecols=['NR_VOTAVEL','RECEITA_TOTAL','QTD_VOTOS','CUSTO_VOTO','VR_TOTAL_BEM_CANDIDATO','Recursos_partido','Recursos_proprios','Recursos_outros_candidatos','Recursos_pessoas_fisicas','Rendimentos_aplicacoes','Financiamento_Coletivo','origens_nao_identificadas'], sep=',', low_memory=False, encoding='latin-1')
+# sample1 = pd.read_csv('teste1.csv',usecols=['NR_VOTAVEL','RECEITA_TOTAL','QTD_VOTOS','CUSTO_VOTO','VR_TOTAL_BEM_CANDIDATO','Recursos_partido','Recursos_proprios','Recursos_outros_candidatos','Recursos_pessoas_fisicas','Rendimentos_aplicacoes','Financiamento_Coletivo','origens_nao_identificadas'], sep=',', low_memory=False, encoding='latin-1')
+sample1 = pd.read_csv('deputados.csv',usecols=['NR_VOTAVEL','CARGO_N','SITUCAO_N','RECEITA_TOTAL','QTD_VOTOS','CUSTO_VOTO','VR_TOTAL_BEM_CANDIDATO','Recursos_partido','Recursos_proprios','Recursos_outros_candidatos','Recursos_pessoas_fisicas','Rendimentos_aplicacoes','Financiamento_Coletivo','origens_nao_identificadas','Comercio_bens_ou_eventos','Doacoes_Internet','DESPESA_CONTRATADA'], sep=';', low_memory=False, encoding='latin-1').fillna(value = 0)
 
 sample = sample1.values
 print(sample.shape)
