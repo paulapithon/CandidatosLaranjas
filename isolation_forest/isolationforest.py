@@ -13,16 +13,16 @@ print(sample.shape)
 ##
 clf = IsolationForest(max_samples='auto', contamination=0.10, n_jobs=-1, behaviour="new") 
  #contamination pega uma porcentagem da base
-#n_jobs define quantos nucleos de hardware serão usados
+#n_jobs define quantos nucleos de hardware serao usados
 
 clf.fit(sample)#ajustando o modelo do isolation forest para a base
 
 scores = clf.decision_function(sample)#classifica os candidatos de -1 a 1 onde quanto mais proximo de -1 mais anomalo
 
-predict  = clf.predict(sample) #classifica os candidatos só entre -1 e 1 mostrar em um gráfico
-#testar varios valores de contamination, quando começar a pegar candidatos que não são anomalias já pode parar
+predict  = clf.predict(sample) #classifica os candidatos so entre -1 e 1 mostrar em um grafico
+#testar varios valores de contamination, quando comecar a pegar candidatos que nao sao anomalias ja pode parar
 
-prop = (float(predict.tolist().count(-1)) / float(len(sample))) #propo~ção de outliers/base pode tirar
+prop = (float(predict.tolist().count(-1)) / float(len(sample))) #proporcao de outliers/base pode tirar
 
 num_outliers = predict.tolist().count(-1) #numero de outliers
 
