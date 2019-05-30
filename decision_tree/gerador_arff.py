@@ -14,13 +14,13 @@ outliers = pd.read_csv('candidatos-com-anomalias2.csv', usecols=['NR_VOTAVEL'], 
 
 arff = '@relation laranjas'
 arff += '\n\n'
-arff += '@attribute idade { <20, 20-40, 40+ }\n'
-arff += '@attribute genero { MASCULINO, FEMININO, N/A }\n'
-arff += '@attribute grau_instrucao { INCOMPLETO, MEDIO, COMPLETO }\n'
-arff += '@attribute estado_civil { SOLTEIRO(A), DIVORCIADO(A), CASADO(A), VIÚVO(A) }\n'
-arff += '@attribute cor {PRETA, PARDA, BRANCA }\n'
-arff += '@attribute cidade_nascimento { RECIFE, INTERIOR }\n'
-arff += '@attribute investigado { SIM, NAO }'
+arff += '@attribute cidade_nascimento {RECIFE,INTERIOR}\n'
+arff += '@attribute idade {<30,30-40,40-50,50+}\n'
+arff += '@attribute genero {MASCULINO,FEMININO}\n'
+arff += '@attribute grau_instrucao {INCOMPLETO,MEDIO,SUPERIOR}\n'
+arff += '@attribute estado_civil {SOLTEIRO(A),DIVORCIADO(A),CASADO(A),VIUVO(A),SEPARADO(A)}\n'
+arff += '@attribute cor {PRETA,PARDA,BRANCA,INDIGENA,AMARELA}\n'
+arff += '@attribute investigado {SIM,NAO}'
 arff += '\n\n'
 arff += '@data\n'
 
@@ -38,12 +38,14 @@ for value in values:
 	birth = datetime.datetime.strptime(value[2], '%d/%m/%Y')
 	today = datetime.date.today()
 	age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
-	if age <= 20:
-		arff += '<20'
-	elif age > 20 and age < 40:
-		arff += '20-40'
+	if age <= 30:
+		arff += '<30'
+	elif age > 30 and age <= 40:
+		arff += '30-40'
+	elif age > 40 and age <= 50:
+		arff += '40-50'
 	else:
-		arff += '40+'
+		arff += '50+'
 	arff += ','
 
 	# Get gender in value[3]
@@ -68,12 +70,19 @@ for value in values:
 	status = value[5]
 	if status == 'VIÚVO(A)':
 		arff += "VIUVO(A)"
+	elif status == 'SEPARADO(A) JUDICIALMENTE':
+		arff += 'SEPARADO(A)'
 	else: 
 		arff += status 
 	arff += ','
 
 	# Get color in value[6]
-	arff += value[6]
+	cor = value[6]
+	if cor == 'INDÍGENA':
+		arff += 'INDIGENA'
+	else:
+		arff += value[6]
+
 	arff += ','
 
 	# Check if outlier
