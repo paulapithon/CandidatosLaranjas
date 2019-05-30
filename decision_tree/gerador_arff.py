@@ -16,7 +16,7 @@ arff = '@relation laranjas'
 arff += '\n\n'
 arff += '@attribute idade { <20, 20-40, 40+ }\n'
 arff += '@attribute genero { MASCULINO, FEMININO, N/A }\n'
-arff += '@attribute grau_instrucao { ENSINO INCOMPLETO, ENSINO MEDIO COMPLETO, SUPERIOR COMPLETO }\n'
+arff += '@attribute grau_instrucao { INCOMPLETO, MEDIO, COMPLETO }\n'
 arff += '@attribute estado_civil { SOLTEIRO(A), DIVORCIADO(A), CASADO(A), VIÚVO(A) }\n'
 arff += '@attribute cor {PRETA, PARDA, BRANCA }\n'
 arff += '@attribute cidade_nascimento { RECIFE, INTERIOR }\n'
@@ -57,11 +57,11 @@ for value in values:
 	# Get school level in value [4]
 	school =  value[4]
 	if school == "SUPERIOR COMPLETO":
-		arff += 'SUPERIOR COMPLETO'
+		arff += 'SUPERIOR'
 	elif school == "ENSINO MÉDIO COMPLETO" or school == "SUPERIOR INCOMPLETO":
-		arff += 'ENSINO MEDIO COMPLETO'
+		arff += 'MEDIO'
 	else:
-		arff += 'ENSINO INCOMPLETO'
+		arff += 'INCOMPLETO'
 	arff += ','
 
 	# Get civil status in value[5]
@@ -81,11 +81,10 @@ for value in values:
 		arff += 'SIM'
 	else:
 		arff += 'NAO'
-
 	arff += '\n'
 
 print(arff)
 
-file = open('weka.arff', 'w+')
+file = open('arvore_candidatos_laranja.arff', 'w+')
 file.write(arff)
 file.close()
