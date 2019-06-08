@@ -5,13 +5,13 @@ import csv
 from sklearn.ensemble import IsolationForest
 
 ### READ FILE.CSV
-sample1 = pd.read_csv('deputados-suplentes-e-nao-eleitos.csv',usecols=['SQ_CANDIDATO','NR_VOTAVEL','CARGO_N','SITUCAO_N','RECEITA_TOTAL','QTD_VOTOS','CUSTO_VOTO','VR_TOTAL_BEM_CANDIDATO','Recursos_partido','Recursos_proprios','Recursos_outros_candidatos','Recursos_pessoas_fisicas','Rendimentos_aplicacoes','Financiamento_Coletivo','origens_nao_identificadas','Comercio_bens_ou_eventos','Doacoes_Internet','DESPESA_CONTRATADA'], sep=';', low_memory=False, encoding='latin-1').fillna(value = 0)
+sample1 = pd.read_csv('deputados-nao-eleitos-brasil-Normalizado.csv',usecols=['SQ_CANDIDATO','CD_GENERO_N','CD_GRAU_INSTRUCAO_N','NR_PARTIDO_N','CD_OCUPACAO_N','CD_SITUCAO_N','CARGO_N','RECEITA_TOTAL_N','QTD_VOTOS_N','CUSTO_VOTO_N','DESPESA_CONTRATADA_N','VR_TOTAL_BEM_CANDIDATO_N'], sep=';', low_memory=False, encoding='latin-1').fillna(value = 0)
 
 sample = sample1.values
 print(sample.shape)
 #Isolation Forest
 ##
-clf = IsolationForest(max_samples='auto', contamination=0.069, n_jobs=-1, behaviour="new") 
+clf = IsolationForest(max_samples='auto', contamination=0.0060, n_jobs=-1, behaviour="new") 
  #contamination pega uma porcentagem da base
 #n_jobs define quantos nucleos de hardware serão usados
 
@@ -46,4 +46,4 @@ print(outliers_position)
 
 candidatosComAnomalias = sample1.iloc[outliers_position]
 
-candidatosComAnomalias.to_csv('candidatos-com-anomalias069.csv', sep=';', index=False)
+candidatosComAnomalias.to_csv('candidatos-com-anomalias0060.csv', sep=';', index=False)
